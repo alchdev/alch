@@ -3,8 +3,8 @@ import { Button } from '@/components/ui/button'
 </script>
 
 <template>
-  <main class="container">
-    <h1>Future Alchemy will be here.</h1>
+  <main class="font-roboto container">
+    <h1 class="font-quicksand font-bold">Future Alchemy will be here.</h1>
     <Button>Click</Button>
   </main>
 </template>
