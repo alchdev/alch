@@ -13,6 +13,7 @@
     "windows": [
       {
         "title": "alch",
+        "decorations": false,
         "width": 800,
         "height": 600
       }
