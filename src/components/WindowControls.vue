@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
+import { useThemeStore } from '@/stores/theme'
 
 import { PhRectangle, PhCards, PhMinus, PhX } from '@phosphor-icons/vue'
 import { getCurrentWindow } from '@tauri-apps/api/window'
-import { useColorMode } from '@vueuse/core'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-const mode = useColorMode({ emitAuto: true })
-const color = ref(mode.valueOf() === 'light' ? 'black' : 'white')
+const theme = useThemeStore()
 const appWindow = getCurrentWindow()
 const isMaximized = ref(false)
 
@@ -28,14 +27,14 @@ onUnmounted(async () => {
 <template>
   <div class="ml-auto">
     <Button variant="ghost" size="icon" @click="appWindow.minimize()">
-      <PhMinus :color="color" />
+      <PhMinus :color="theme.color" />
     </Button>
     <Button variant="ghost" size="icon" @click="appWindow.toggleMaximize()">
-      <PhCards v-if="isMaximized" :color="color" />
-      <PhRectangle v-else :color="color" />
+      <PhCards v-if="isMaximized" :color="theme.color" />
+      <PhRectangle v-else :color="theme.color" />
     </Button>
     <Button variant="ghost" size="icon" @click="appWindow.close()">
-      <PhX :color="color" />
+      <PhX :color="theme.color" />
     </Button>
   </div>
 </template>
