@@ -133,7 +133,7 @@ const menu: MenuButton[] = [
             name: 'Light',
             theme: 'light',
             props: {
-              onClick: () => theme.change('light'),
+              onClick: () => (theme.mode = 'light'),
             },
           },
           {
@@ -142,7 +142,7 @@ const menu: MenuButton[] = [
             name: 'Dark',
             theme: 'dark',
             props: {
-              onClick: () => theme.change('dark'),
+              onClick: () => (theme.mode = 'dark'),
             },
           },
           {
@@ -151,7 +151,7 @@ const menu: MenuButton[] = [
             name: 'System',
             theme: 'auto',
             props: {
-              onClick: () => theme.change('auto'),
+              onClick: () => (theme.mode = 'auto'),
             },
           },
         ],
