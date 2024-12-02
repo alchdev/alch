@@ -8,7 +8,7 @@ export const useThemeStore = defineStore('theme', () => {
   const mode = useColorMode({ emitAuto: true })
   const color = ref(mode.value === 'light' ? 'black' : 'white')
 
-  function changeTheme(theme: Theme) {
+  function change(theme: Theme) {
     mode.value = theme
     color.value = theme === 'light' ? 'black' : 'white'
   }
@@ -16,6 +16,6 @@ export const useThemeStore = defineStore('theme', () => {
   return {
     mode,
     color,
-    changeTheme,
+    change,
   }
 })

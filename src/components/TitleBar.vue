@@ -27,16 +27,10 @@ import {
 } from '@/components/ui/menubar'
 
 import { PhList } from '@phosphor-icons/vue'
-import { useColorMode } from '@vueuse/core'
-import { ref } from 'vue'
 import WindowControls from './WindowControls.vue'
+import { useThemeStore } from '@/stores/theme'
 
-const mode = useColorMode({ emitAuto: true })
-const color = ref(mode.valueOf() === 'light' ? 'black' : 'white')
-const changeTheme = (theme: Theme) => {
-  mode.value = theme
-  color.value = theme === 'light' ? 'black' : 'white'
-}
+const theme = useThemeStore()
 
 const isTauriApp = '__TAURI_INTERNALS__' in window
 
@@ -139,7 +133,7 @@ const menu: MenuButton[] = [
             name: 'Light',
             theme: 'light',
             props: {
-              onClick: () => changeTheme('light'),
+              onClick: () => theme.change('light'),
             },
           },
           {
@@ -148,7 +142,7 @@ const menu: MenuButton[] = [
             name: 'Dark',
             theme: 'dark',
             props: {
-              onClick: () => changeTheme('dark'),
+              onClick: () => theme.change('dark'),
             },
           },
           {
@@ -157,7 +151,7 @@ const menu: MenuButton[] = [
             name: 'System',
             theme: 'auto',
             props: {
-              onClick: () => changeTheme('auto'),
+              onClick: () => theme.change('auto'),
             },
           },
         ],
@@ -189,7 +183,7 @@ const dropdownMenuComponents = {
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
         <Button class="min-[400px]:hidden" variant="ghost" size="icon">
-          <PhList :color="mode.valueOf() === 'light' ? 'black' : 'white'" />
+          <PhList :color="theme.color" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent class="w-24">
@@ -230,8 +224,7 @@ const dropdownMenuComponents = {
                             :key="subItem.id"
                             :class="{
                               'font-bold':
-                                subItem.theme &&
-                                mode.valueOf() === subItem.theme,
+                                subItem.theme && theme.mode === subItem.theme,
                             }"
                           >
                             {{ subItem.name }}
@@ -269,8 +262,7 @@ const dropdownMenuComponents = {
                 v-bind="subItem.props"
                 :key="subItem.id"
                 :class="{
-                  'font-bold':
-                    subItem.theme && mode.valueOf() === subItem.theme,
+                  'font-bold': subItem.theme && theme.mode === subItem.theme,
                 }"
               >
                 {{ subItem.name }}
