@@ -58,7 +58,7 @@ interface MenubarItemInterface {
     shortcut?: string,
     theme?: Theme
     props?: {
-        onClick?: Function
+        onClick?: () => void
     }
 }
 
@@ -174,7 +174,7 @@ const dropdownMenuComponents = {
                         <DropdownMenuSubTrigger>{{ menuButton.name }}</DropdownMenuSubTrigger>
                         <DropdownMenuPortal>
                             <DropdownMenuSubContent>
-                                <component v-for="item in menuButton.content" :is="dropdownMenuComponents[item.component]">
+                                <component :is="dropdownMenuComponents[item.component]" v-for="item in menuButton.content">
                                     <template v-if="item.component === 'MenubarItem'">
                                         {{ item.name }}
                                         <DropdownMenuShortcut>{{ item.shortcut }}</DropdownMenuShortcut>
@@ -205,7 +205,7 @@ const dropdownMenuComponents = {
         <MenubarMenu v-for="menuButton in menu">
             <MenubarTrigger class="hidden min-[400px]:block">{{ menuButton.name }}</MenubarTrigger>
             <MenubarContent>
-                <component v-for="item in menuButton.content" :is="menubarComponents[item.component]">
+                <component :is="menubarComponents[item.component]" v-for="item in menuButton.content">
                     <template v-if="item.component === 'MenubarItem'">
                         {{ item.name }}
                         <MenubarShortcut>{{ item.shortcut }}</MenubarShortcut>
