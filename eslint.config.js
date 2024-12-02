@@ -11,7 +11,7 @@ export default typescriptEslint.config(
       '**/coverage',
       '**/dist',
       'src/components/ui/**',
-      'vite-env.d.ts',
+      'src/vite-env.d.ts',
     ],
   },
   {
