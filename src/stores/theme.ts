@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useColorMode } from '@vueuse/core'
 
 export const useThemeStore = defineStore('theme', () => {

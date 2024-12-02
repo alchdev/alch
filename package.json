@@ -26,7 +26,8 @@
     "radix-vue": "^1.9.10",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
