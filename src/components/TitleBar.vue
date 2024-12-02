@@ -43,16 +43,19 @@ const isTauriApp = '__TAURI_INTERNALS__' in window
 type Theme = 'light' | 'dark' | 'auto'
 
 interface MenubarSubInterface {
+  id: number
   component: 'MenubarSub'
   name: string
   content: MenubarItemInterface[]
 }
 
 interface MenubarSeparatorInterface {
+  id: number
   component: 'MenubarSeparator'
 }
 
 interface MenubarItemInterface {
+  id: number
   component: 'MenubarItem'
   name: string
   shortcut?: string
@@ -63,6 +66,7 @@ interface MenubarItemInterface {
 }
 
 interface MenuButton {
+  id: number
   name: string
   content: (
     | MenubarItemInterface
@@ -73,52 +77,64 @@ interface MenuButton {
 
 const menu: MenuButton[] = [
   {
+    id: 1,
     name: 'File',
     content: [
       {
+        id: 2,
         component: 'MenubarItem',
         name: 'Open File',
         shortcut: 'Ctrl+O',
       },
       {
+        id: 3,
         component: 'MenubarItem',
         name: 'Close File',
         shortcut: 'Ctrl+W',
       },
       {
+        id: 4,
         component: 'MenubarSeparator',
       },
       {
+        id: 5,
         component: 'MenubarItem',
         name: 'Save File',
         shortcut: 'Ctrl+S',
       },
       {
+        id: 6,
         component: 'MenubarItem',
         name: 'Save As...',
         shortcut: 'Ctrl+Shift+S',
       },
       {
+        id: 7,
         component: 'MenubarSeparator',
       },
       {
+        id: 8,
         component: 'MenubarItem',
         name: 'Import File',
       },
       {
+        id: 9,
         component: 'MenubarItem',
         name: 'Export File',
       },
     ],
   },
   {
+    id: 10,
     name: 'Settings',
     content: [
       {
+        id: 11,
         component: 'MenubarSub',
         name: 'Change Theme',
         content: [
           {
+            id: 12,
             component: 'MenubarItem',
             name: 'Light',
             theme: 'light',
@@ -127,6 +143,7 @@ const menu: MenuButton[] = [
             },
           },
           {
+            id: 13,
             component: 'MenubarItem',
             name: 'Dark',
             theme: 'dark',
@@ -135,6 +152,7 @@ const menu: MenuButton[] = [
             },
           },
           {
+            id: 14,
             component: 'MenubarItem',
             name: 'System',
             theme: 'auto',
@@ -181,7 +199,7 @@ const dropdownMenuComponents = {
           ></DropdownMenuLabel
         >
         <DropdownMenuSeparator />
-        <DropdownMenuGroup v-for="menuButton in menu">
+        <DropdownMenuGroup v-for="menuButton in menu" :key="menuButton.id">
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>{{
               menuButton.name
@@ -190,7 +208,8 @@ const dropdownMenuComponents = {
               <DropdownMenuSubContent>
                 <component
                   :is="dropdownMenuComponents[item.component]"
-                  v-for="item in menuButton.content"
+                  v-for="(item, index) in menuButton.content"
+                  :key="index"
                 >
                   <template v-if="item.component === 'MenubarItem'">
                     {{ item.name }}
@@ -208,6 +227,7 @@ const dropdownMenuComponents = {
                           <DropdownMenuItem
                             v-for="subItem in item.content"
                             v-bind="subItem.props"
+                            :key="subItem.id"
                             :class="{
                               'font-bold':
                                 subItem.theme &&
@@ -227,7 +247,7 @@ const dropdownMenuComponents = {
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-    <MenubarMenu v-for="menuButton in menu">
+    <MenubarMenu v-for="menuButton in menu" :key="menuButton.id">
       <MenubarTrigger class="hidden min-[400px]:block">{{
         menuButton.name
       }}</MenubarTrigger>
@@ -235,6 +255,7 @@ const dropdownMenuComponents = {
         <component
           :is="menubarComponents[item.component]"
           v-for="item in menuButton.content"
+          :key="item.id"
         >
           <template v-if="item.component === 'MenubarItem'">
             {{ item.name }}
@@ -246,6 +267,7 @@ const dropdownMenuComponents = {
               <MenubarItem
                 v-for="subItem in item.content"
                 v-bind="subItem.props"
+                :key="subItem.id"
                 :class="{
                   'font-bold':
                     subItem.theme && mode.valueOf() === subItem.theme,
