@@ -190,7 +190,8 @@ const dropdownMenuComponents = {
               <DropdownMenuSubContent>
                 <component
                   :is="dropdownMenuComponents[item.component]"
-                  v-for="item in menuButton.content">
+                  v-for="item in menuButton.content"
+                >
                   <template v-if="item.component === 'MenubarItem'">
                     {{ item.name }}
                     <DropdownMenuShortcut>{{
@@ -211,7 +212,8 @@ const dropdownMenuComponents = {
                               'font-bold':
                                 subItem.theme &&
                                 mode.valueOf() === subItem.theme,
-                            }">
+                            }"
+                          >
                             {{ subItem.name }}
                           </DropdownMenuItem>
                         </DropdownMenuSubContent>
@@ -232,7 +234,8 @@ const dropdownMenuComponents = {
       <MenubarContent>
         <component
           :is="menubarComponents[item.component]"
-          v-for="item in menuButton.content">
+          v-for="item in menuButton.content"
+        >
           <template v-if="item.component === 'MenubarItem'">
             {{ item.name }}
             <MenubarShortcut>{{ item.shortcut }}</MenubarShortcut>
@@ -246,7 +249,8 @@ const dropdownMenuComponents = {
                 :class="{
                   'font-bold':
                     subItem.theme && mode.valueOf() === subItem.theme,
-                }">
+                }"
+              >
                 {{ subItem.name }}
               </MenubarItem>
             </MenubarSubContent>
