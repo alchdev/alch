@@ -26,10 +26,10 @@ import {
     MenubarSubContent
 } from '@/components/ui/menubar'
 
-import { PhList, PhMinus, PhCornersIn, PhX } from '@phosphor-icons/vue'
-import { getCurrentWindow, Window } from '@tauri-apps/api/window'
+import { PhList } from '@phosphor-icons/vue'
 import { useColorMode } from '@vueuse/core'
 import { ref } from 'vue'
+import WindowControls from './WindowControls.vue'
 
 const mode = useColorMode({ emitAuto: true })
 const color = ref(mode.valueOf() === 'light' ? 'black' : 'white')
@@ -39,11 +39,6 @@ const changeTheme = (theme: Theme) => {
 }
 
 const isTauriApp = '__TAURI_INTERNALS__' in window
-let alchWindow: Window 
-
-if (isTauriApp) {
-    alchWindow = getCurrentWindow()
-}
 
 type Theme = 'light' | 'dark' | 'auto'
 
@@ -230,16 +225,6 @@ const dropdownMenuComponents = {
                 </component>
             </MenubarContent>
         </MenubarMenu>
-        <div v-if="isTauriApp" class="ml-auto">
-            <Button variant="ghost" size="icon" @click="alchWindow.minimize()">
-                <PhMinus :color="color" />
-            </Button>
-            <Button variant="ghost" size="icon" @click="alchWindow.toggleMaximize()">
-                <PhCornersIn :color="color" />
-            </Button>
-            <Button variant="ghost" size="icon" @click="alchWindow.close()">
-                <PhX :color="color" />
-            </Button>
-        </div>
+        <WindowControls v-if="isTauriApp" />
     </Menubar>
 </template>
