@@ -1,0 +1,53 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Edge",
+            "request": "launch",
+            "type": "msedge",
+            "url": "http://localhost:1420/",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Launch via NPM",
+            "request": "launch",
+            "runtimeArgs": [
+                "run",
+                "dev"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "name": "Front-end App Debug",
+            "type": "msedge",
+            "port": 9222,
+            "request": "launch",
+            "runtimeExecutable": "${workspaceFolder}/src-tauri/target/debug/alch.exe",
+            "useWebView": true,
+            "webRoot": "${workspaceFolder}",
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Run on Web",
+            "configurations": [
+                "Launch via NPM",
+                "Launch Edge"
+            ]
+        },
+        {
+            "name": "Run on Windows",
+            "configurations": [
+                "Launch via NPM",
+                "Front-end App Debug"
+            ]
+        }
+    ]
+}
