@@ -15,7 +15,9 @@
         "title": "alch",
         "decorations": false,
         "width": 800,
-        "height": 600
+        "height": 600,
+        "minWidth": 260,
+        "minHeight": 200
       }
     ],
     "security": {

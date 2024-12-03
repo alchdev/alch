@@ -174,7 +174,10 @@ const dropdownMenuComponents = {
 </script>
 
 <template>
-  <Menubar data-tauri-drag-region class="rounded-none border-x-0 border-t-0">
+  <Menubar
+    data-tauri-drag-region
+    class="fixed w-full rounded-none border-x-0 border-t-0"
+  >
     <span
       data-tauri-drag-region
       class="font-quicksand font-bold pl-4 pr-2 select-none hidden min-[400px]:block"
